@@ -10,6 +10,7 @@ import java.util.Scanner;
 import Libre.Roles;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Iterator;
 
 /**
  *
@@ -30,7 +31,7 @@ public class TPUsuario {
         String FeCrea;
         Roles tipoUsr;
         String tipoUs;
-        int edad;
+        int edad,indi;
         String sigo; 
         boolean resul;
         LocalDate Fechalocal = LocalDate.now();        
@@ -38,8 +39,8 @@ public class TPUsuario {
         
         ArrayList<ClaseUsuario> Usuarios = new ArrayList<>();
         ClaseUsuario usr = new ClaseUsuario();
-        Usuarios.add(0,usr);  //  "d1","d2","d3","d4","d5",tipoUsr,1);
-        Ape=Usuarios.get(0).Apellido;
+//        Usuarios.add(0,usr);  //  "d1","d2","d3","d4","d5",tipoUsr,1);
+//        Ape=Usuarios.get(0).Apellido;
         
         Scanner datos = new Scanner(System.in);
         campo=0;
@@ -47,20 +48,21 @@ public class TPUsuario {
         sigo = "SI";
 
         while (sigo == "SI"){
-        System.out.println("Ingreso Datos Usuario " + (campo+1));
-        System.out.println("Ingrese Nombre Alumno: ");
+            
+        System.out.println("Ingreso Datos Usuario " + (campo));
+        System.out.println("Ingrese Nombre Usuario: ");
         do {
          Nom=datos.next();
          Nom=usr.validarNombreApellido(Nom);
         } while(Nom.isEmpty() );
 
-        System.out.println("Ingrese Apellido Alumno: ");
+        System.out.println("Ingrese Apellido Usuario: ");
         do {
          Ape=datos.next();
          Ape=usr.validarNombreApellido(Ape);
         } while(Ape.isEmpty() );
 
-        System.out.println("Ingrese Mail Alumno: ");
+        System.out.println("Ingrese Mail Usuario: ");
         do {
          mail=datos.next();
          mail=usr.validarMail(mail);
@@ -68,13 +70,13 @@ public class TPUsuario {
         
         do {
           resul=true;   
-          System.out.println("Ingrese Fecha Nacimiento Alumno (DD/MM/YYYY): ");
+          System.out.println("Ingrese Fecha Nacimiento Usuario (DD/MM/YYYY): ");
           do {
            FeNac=datos.next();
            FeNac=usr.validarFecha(FeNac);
           } while(FeNac.isBlank());
 //        SimpleDateFormat FeFor = new SimpleDateFormat("dd/MM/yyyy");
-//  No valido si fecha Nac es mayor a la fecha actual        
+//  Calculo edad y Valido si fecha Nac es mayor a la fecha actual        
           edad=usr.CalculoEdad(FeNac);
           if(edad<0){
              System.out.println("Fecha Nacimiento Incorrecta. Intente nuevamente.");
@@ -82,7 +84,7 @@ public class TPUsuario {
           }
         } while(!resul);
 
-        System.out.println("Ingrese Rol Alumno (1=Usuario [Default] ; 2=Administrador) : ");
+        System.out.println("Ingrese Rol Usuario (1=Usuario [Default] ; 2=Administrador) : ");
          tipoUs="1";   
          tipoUs=datos.next();
          tipoUs = tipoUs.trim();
@@ -90,7 +92,7 @@ public class TPUsuario {
          if(Integer.parseInt(tipoUs) == 2){
             tipoUsr=Roles.Administrador;
          }
-
+         
         usr.setNombre(Nom);
         usr.setApellido(Ape);
         usr.setMail(mail);
@@ -99,12 +101,14 @@ public class TPUsuario {
         FeCrea = String.valueOf(Fechalocal);        
         usr.setFCreac(FeCrea);
         usr.setRol(tipoUsr);  
-
-        Usuarios.add(campo,usr);
-        System.out.println(" Alumno " + campo+1 + " Ingresado .......... " );
+//   Cargo el usuario en el ArrayList
+        Usuarios.add(usr);
+        
+//        Usuarios.add(campo,usr);
+        System.out.println(" Usuario " + campo + " Ingresado .......... " );
         System.out.println(" .............................. " );
         
-         System.out.println("Desea Ingresar un Nuevo Alumno? (1=SI [Default] ; 2=NO) : ");
+         System.out.println("Desea Ingresar un Nuevo Usuario? (1=SI [Default] ; 2=NO) : ");
          tipoUs="1";   
          tipoUs=datos.next();
          tipoUs = tipoUs.trim();
@@ -113,8 +117,9 @@ public class TPUsuario {
          } else{
              campo++;
          }
-        }
-// Fin del While de Carga de Alumnos .....    
+        }  // Fin del While de Carga de Alumnos .....    
+
+  
 
     }
 }
