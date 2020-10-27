@@ -49,20 +49,20 @@ public class TPUsuario {
 
         while (sigo == "SI"){
             
-        System.out.println("Ingreso Datos Usuario " + (campo));
-        System.out.println("Ingrese Nombre Usuario: ");
+        System.out.println("Ingreso Datos del Usuario " + (campo));
+        System.out.println("Ingrese Nombre del Usuario: ");
         do {
          Nom=datos.next();
          Nom=usr.validarNombreApellido(Nom);
         } while(Nom.isEmpty() );
 
-        System.out.println("Ingrese Apellido Usuario: ");
+        System.out.println("Ingrese Apellido del Usuario: ");
         do {
          Ape=datos.next();
          Ape=usr.validarNombreApellido(Ape);
         } while(Ape.isEmpty() );
 
-        System.out.println("Ingrese Mail Usuario: ");
+        System.out.println("Ingrese Mail del Usuario: ");
         do {
          mail=datos.next();
          mail=usr.validarMail(mail);
@@ -70,7 +70,7 @@ public class TPUsuario {
         
         do {
           resul=true;   
-          System.out.println("Ingrese Fecha Nacimiento Usuario (DD/MM/YYYY): ");
+          System.out.println("Ingrese Fecha Nacimiento del Usuario (DD/MM/YYYY): ");
           do {
            FeNac=datos.next();
            FeNac=usr.validarFecha(FeNac);
@@ -84,7 +84,7 @@ public class TPUsuario {
           }
         } while(!resul);
 
-        System.out.println("Ingrese Rol Usuario (1=Usuario [Default] ; 2=Administrador) : ");
+        System.out.println("Ingrese Rol del Usuario (1=Usuario [Default] ; 2=Administrador) : ");
          tipoUs="1";   
          tipoUs=datos.next();
          tipoUs = tipoUs.trim();
@@ -101,6 +101,7 @@ public class TPUsuario {
         FeCrea = String.valueOf(Fechalocal);        
         usr.setFCreac(FeCrea);
         usr.setRol(tipoUsr);  
+
 //   Cargo el usuario en el ArrayList
         Usuarios.add(usr);
         
@@ -119,7 +120,6 @@ public class TPUsuario {
          }
         }  // Fin del While de Carga de Alumnos .....    
 
-  
 
     }
 }
