@@ -37,8 +37,9 @@ public class TPUsuario {
         LocalDate Fechalocal = LocalDate.now();        
         tipoUsr = Roles.Usuario;
         
-        ArrayList<ClaseUsuario> Usuarios = new ArrayList<>();
-        ClaseUsuario usr = new ClaseUsuario();
+        ArrayList<ClaseUsuario> Usuarios = new ArrayList<ClaseUsuario>();
+        ClaseUsuario usr;
+// = new ClaseUsuario();
 //        Usuarios.add(0,usr);  //  "d1","d2","d3","d4","d5",tipoUsr,1);
 //        Ape=Usuarios.get(0).Apellido;
         
@@ -49,6 +50,8 @@ public class TPUsuario {
 
         while (sigo == "SI"){
             
+        usr = new ClaseUsuario();
+        
         System.out.println("Ingreso Datos del Usuario " + (campo));
         System.out.println("Ingrese Nombre del Usuario: ");
         do {
@@ -75,7 +78,7 @@ public class TPUsuario {
            FeNac=datos.next();
            FeNac=usr.validarFecha(FeNac);
           } while(FeNac.isBlank());
-//        SimpleDateFormat FeFor = new SimpleDateFormat("dd/MM/yyyy");
+          
 //  Calculo edad y Valido si fecha Nac es mayor a la fecha actual        
           edad=usr.CalculoEdad(FeNac);
           if(edad<0){
@@ -119,7 +122,13 @@ public class TPUsuario {
              campo++;
          }
         }  // Fin del While de Carga de Alumnos .....    
-
-
-    }
-}
+//    ............  Muestro Usuarios Cargados  .......
+        System.out.println(" Usuarios Ingresados .. " + Usuarios.size() );
+        Iterator<ClaseUsuario> nombreIterator;
+        nombreIterator = Usuarios.iterator();
+        while(nombreIterator.hasNext()){
+	   usr = nombreIterator.next();
+	   System.out.println(usr.Nombre + " / " + usr.Apellido + " / " + usr.Mail + " / " + usr.FNac + " / " + usr.Edad + " / " + usr.Rol + " / " + usr.FCreac );
+        }
+    }   //  Fin main
+}    //  Fin class
