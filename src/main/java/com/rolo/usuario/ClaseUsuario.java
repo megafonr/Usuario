@@ -189,4 +189,9 @@ public class ClaseUsuario {
      return edad;    
     }
     
+    public void MostrarDato(){
+        //  Salida
+        
+    }
+    
 }
