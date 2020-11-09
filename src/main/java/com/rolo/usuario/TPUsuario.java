@@ -8,8 +8,9 @@ package com.rolo.usuario;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Libre.Roles;
-import java.text.SimpleDateFormat;
+// import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 
 /**
@@ -29,17 +30,14 @@ public class TPUsuario {
         String mail;
         String FeNac;
         String FeCrea;
-        Roles tipoUsr;
-        String tipoUs;
-        int edad,indi;
-        String sigo; 
+        Roles tipoUsr = Roles.USR ;
+        String tipoUs, variosdatos, sigo; 
+        int edad, indi;
         boolean resul;
         LocalDate Fechalocal = LocalDate.now();        
-        tipoUsr = Roles.Usuario;
         
         ArrayList<ClaseUsuario> Usuarios = new ArrayList<ClaseUsuario>();
         ClaseUsuario usr;
-// = new ClaseUsuario();
 //        Usuarios.add(0,usr);  //  "d1","d2","d3","d4","d5",tipoUsr,1);
 //        Ape=Usuarios.get(0).Apellido;
         
@@ -49,8 +47,8 @@ public class TPUsuario {
         sigo = "SI";
 
         while (sigo == "SI"){
-            
-        usr = new ClaseUsuario();
+
+            usr = new ClaseUsuario();
         
         System.out.println("Ingreso Datos del Usuario " + (campo));
         System.out.println("Ingrese Nombre del Usuario: ");
@@ -85,17 +83,42 @@ public class TPUsuario {
              System.out.println("Fecha Nacimiento Incorrecta. Intente nuevamente.");
              resul=false;
           }
+          else if(edad<18){
+             System.out.println("Debe ser Mayor de edad. Intente nuevamente.");
+             resul=false;
+          }
+          else if(edad>100){
+             System.out.println("Debe ser una edad menor. Intente nuevamente.");
+             resul=false;
+          }
+              
         } while(!resul);
+//  Agrego
+        do {
+          resul=true;  
+//  Hasta aca          
+         try{
+           System.out.println("Ingrese Rol del Usuario (Usr [Default] ; Admin) : ");
 
-        System.out.println("Ingrese Rol del Usuario (1=Usuario [Default] ; 2=Administrador) : ");
-         tipoUs="1";   
-         tipoUs=datos.next();
-         tipoUs = tipoUs.trim();
-         tipoUsr=Roles.Usuario;
-         if(Integer.parseInt(tipoUs) == 2){
-            tipoUsr=Roles.Administrador;
+           tipoUs="USR";   
+           tipoUs=datos.next().toUpperCase();
+           tipoUsr= Roles.valueOf(tipoUs);    //   Evalua el dato ingresado
+//           variosdatos=tipoUsr.toString();
+         } catch(IllegalArgumentException e){
+           System.out.println(" Debe Ingresar Usr o Admin . ");
+           resul=false;  
+//           tipoUs="USR";   
+//           tipoUsr= Roles.valueOf(tipoUs);  //   Evalua el dato ingresado
          }
-         
+/**
+           variosdatos="ADMIN";
+           if(Roles.valueOf(tipoUs.trim()) == Roles.valueOf(variosdatos.trim())){
+             tipoUsr=Roles.ADMIN;
+           }
+*/
+       } while(!resul);
+
+          
         usr.setNombre(Nom);
         usr.setApellido(Ape);
         usr.setMail(mail);
@@ -112,15 +135,27 @@ public class TPUsuario {
         System.out.println(" Usuario " + campo + " Ingresado .......... " );
         System.out.println(" .............................. " );
         
+        do{
+         resul=true;   
          System.out.println("Desea Ingresar un Nuevo Usuario? (1=SI [Default] ; 2=NO) : ");
+         try {
          tipoUs="1";   
          tipoUs=datos.next();
+         
          tipoUs = tipoUs.trim();
          if(Integer.parseInt(tipoUs) == 2){
             sigo = "NO";
          } else{
              campo++;
          }
+//  InputMismatchException         
+         } catch(NumberFormatException e) {
+           System.out.println(" Debe Ingresar un valor numerico 1 o 2  ");
+           resul=false;  
+         }    
+         
+        } while(!resul);
+        
         }  // Fin del While de Carga de Alumnos .....    
 //    ............  Muestro Usuarios Cargados  .......
         System.out.println(" Usuarios Ingresados .. " + Usuarios.size() );
