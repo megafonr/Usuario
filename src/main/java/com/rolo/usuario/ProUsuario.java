@@ -6,6 +6,7 @@
 package com.rolo.usuario;
 
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +21,19 @@ public class ProUsuario {
      // TODO code application logic here
       String strTest = "99";   
       Calendar otrafecha = Calendar.getInstance();
+        /* Declaramos una variable String*/
+        String nombre;
+        /* Contruimos el cuandro de diálogo*/
+        nombre=JOptionPane.showInputDialog("Introduce tu nombre");
+        /* Mostramos el nombre por consola*/
+        System.out.println(nombre);     
+
       int ao = otrafecha.get(Calendar.YEAR);
       int me = otrafecha.get(Calendar.MONTH) + 1;
       int di = otrafecha.get(Calendar.DAY_OF_MONTH);
+      int ho = otrafecha.get(Calendar.HOUR_OF_DAY );
+      int mi = otrafecha.get(Calendar.MINUTE );
+      int se = otrafecha.get(Calendar.SECOND );
       try {
       int iTest = Integer.valueOf(strTest);   
       System.out.println("Cadena real:" + strTest);   
@@ -30,6 +41,9 @@ public class ProUsuario {
       System.out.println("---- Año: " + ao);   
       System.out.println("-------- Mes: " + me);   
       System.out.println("------------ Dia: " + di);   
+      System.out.println("---------- Hora: " + ho);   
+      System.out.println("--------- Minuto: " + mi);   
+      System.out.println("---------- Segundo: " + se);   
       }
       catch(NumberFormatException e){
       System.out.println("Convertido a Int:" + e);             
