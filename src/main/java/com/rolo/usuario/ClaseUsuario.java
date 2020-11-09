@@ -123,10 +123,22 @@ public class ClaseUsuario {
 
         try{
         fecha = fecha.trim();
+//        SimpleDateFormat fechaformato = new SimpleDateFormat("dd/MM/yyyy");
+        
         SimpleDateFormat FecFormato = new SimpleDateFormat("dd/MM/yyyy");
         FecFormato.setLenient(false);
+
+        String[] normali = fecha.split("/");
+        if (normali.length == 3){
+          if(normali[2].length() < 4)
+            fecha=normali[0] + "/" + normali[1] + "/" + "19" + normali[2];
         
-        FecFormato.parse(fecha);
+          FecFormato.parse(fecha);
+        } else{
+           System.out.println("Debe ingresar una Fecha Valida: ");    
+           fecha = "";
+         }
+        
         }
         catch (ParseException e){
          System.out.println("Debe ingresar una Fecha Valida: " + e);    
@@ -189,9 +201,15 @@ public class ClaseUsuario {
      return edad;    
     }
     
-    public void MostrarDato(){
+    public boolean ValidoValorOp(String tipoUs){
         //  Salida
-        
+        tipoUs = tipoUs.trim();
+        if(tipoUs=="1"){
+            return false;
+        }
+            
+            
+    return true;
     }
     
 }
